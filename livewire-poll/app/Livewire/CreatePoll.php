@@ -8,18 +8,27 @@ use Livewire\Attributes\Validate;
 
 class CreatePoll extends Component
 {
+    #[Validate([
+        'title' => 'required|min:3|max:255'
+    ], message: [
+        'title.required' => 'The title is required',
+        'title.min' => 'The title must be at least 3 characters long',
+        'title.max' => 'The title must be no more than 255 characters long',
+    ])]
     public string $title;
-    public array $options = ['First'];
 
-    protected $rules = [
-        'title' => 'required|min:3|max:255',
+    #[Validate([
         'options' => 'required|array|min:1|max:10',
         'options.*' => 'required|min:1|max:255'
-    ];
-
-    protected $messages = [
-        'options.*' => 'The option can\'t be empty.'
-    ];
+    ], message: [
+        'options.required' => 'Enter at least 1 option.',
+        'options.min' => 'You must have at least one option.',
+        'options.max' => 'You cannot enter more than 10 options.',
+        'options.*.required' => 'The option name is missing.',
+        'options.*.min' => 'The option name must be at least 1 character in length.',
+        'options.*.max' => 'The option name must be no more than 255 characters in length.',
+    ])]
+    public array $options = ['First'];
 
     public function render()
     {
@@ -44,8 +53,6 @@ class CreatePoll extends Component
 
     public function createPoll()
     {
-        $this->validate();
-
         Poll::create(['title' => $this->title])
             ->options()
             ->createMany(
