@@ -53,6 +53,8 @@ class CreatePoll extends Component
 
     public function createPoll()
     {
+        $this->validate();
+
         Poll::create(['title' => $this->title])
             ->options()
             ->createMany(
