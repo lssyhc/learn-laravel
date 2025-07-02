@@ -17,12 +17,12 @@
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">Experience</div>
-                    <x-radio-group name="experience" :options="$experience" />
+                    <x-radio-group name="experience" :options="array_combine(array_map('ucfirst', $experience), $experience)" />
                 </div>
 
                 <div>
                     <div class="mb-1 font-semibold">Category</div>
-                    <x-radio-group name="category" :options="$category" />
+                    <x-radio-group name="category" :options="array_combine(array_map('ucfirst', $category), $category)" />
                 </div>
             </div>
 
