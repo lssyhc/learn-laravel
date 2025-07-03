@@ -1,28 +1,33 @@
 <x-layout>
     <x-breadcrumbs class="mb-4" :links="['Jobs' => route('jobs.index')]" />
 
-    <x-card class="mb-4 text-sm">
-        <form id="filtering-form" method="GET" action="{{route('jobs.index')}}">
+    <x-card class="mb-4 text-sm" x-data="">
+        <form x-ref="filters" id="filtering-form" method="GET" action="{{route('jobs.index')}}">
             <div class="mb-4 grid grid-cols-2 gap-4">
                 <div>
                     <div class="mb-1 font-semibold">Search</div>
-                    <x-text-input form-id="filtering-form" name="search" value="{{request('search')}}" placeholder="Search for any text" />
+                    <x-text-input form-ref="filters" name="search" value="{{request('search')}}"
+                        placeholder="Search for any text" />
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">Salary</div>
                     <div class="flex space-x-2">
-                        <x-text-input form-id="filtering-form" name="min_salary" value="{{request('min_salary')}}" placeholder="From" />
-                        <x-text-input form-id="filtering-form" name="max_salary" value="{{request('max_salary')}}" placeholder="To" />
+                        <x-text-input form-ref="filters" name="min_salary" value="{{request('min_salary')}}"
+                            placeholder="From" />
+                        <x-text-input form-ref="filters" name="max_salary" value="{{request('max_salary')}}"
+                            placeholder="To" />
                     </div>
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">Experience</div>
-                    <x-radio-group name="experience" :options="array_combine(array_map('ucfirst', $experience), $experience)" />
+                    <x-radio-group name="experience"
+                        :options="array_combine(array_map('ucfirst', $experience), $experience)" />
                 </div>
 
                 <div>
                     <div class="mb-1 font-semibold">Category</div>
-                    <x-radio-group name="category" :options="array_combine(array_map('ucfirst', $category), $category)" />
+                    <x-radio-group name="category"
+                        :options="array_combine(array_map('ucfirst', $category), $category)" />
                 </div>
             </div>
 
