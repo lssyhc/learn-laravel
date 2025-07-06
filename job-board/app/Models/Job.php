@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -51,5 +52,12 @@ class Job extends Model
         })->when($filters['category'] ?? null, function ($query, $category) {
             $query->where('category', $category);
         });
+    }
+
+    public function hasAppliedUser(Authenticatable|User|int $user): bool
+    {
+        return $this->where('id', $this->id)
+            ->whereHas('jobApplications', fn($query) => $query->where('user_id', '=', $user->id ?? $user))
+            ->exists();
     }
 }

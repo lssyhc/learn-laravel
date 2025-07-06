@@ -30,7 +30,7 @@ class JobApplicationController extends Controller
             ])
         ]);
 
-        return redirect()->route('jobs.show', $job)->with('success', 'Job application submitted!');
+        return redirect()->route('jobs.show', $job)->with('success', 'Job application submitted.');
     }
 
     /**
