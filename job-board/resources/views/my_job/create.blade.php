@@ -31,7 +31,7 @@
 
                 <div>
                     <x-label for="category" :required="true">Category</x-label>
-                    <x-radio-group name="category" :value="old('category')" :all-option="false" :options="array_combine(array_map('ucfirst', $experience), $experience)" />
+                    <x-radio-group name="category" :value="old('category')" :all-option="false" :options="array_combine(array_map('ucfirst', $category), $category)" />
                 </div>
 
                 <div class="col-span-2">

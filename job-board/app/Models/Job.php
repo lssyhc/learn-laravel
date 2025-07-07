@@ -15,6 +15,8 @@ class Job extends Model
     /** @use HasFactory<\Database\Factories\JobFactory> */
     use HasFactory;
 
+    protected $fillable = ['title', 'location', 'salary', 'description', 'experience', 'category'];
+
     public static array $experience = ['entry', 'intermediate', 'senior'];
     public static array $category = [
         'IT',
@@ -57,7 +59,7 @@ class Job extends Model
     public function hasAppliedUser(Authenticatable|User|int $user): bool
     {
         return $this->where('id', $this->id)
-            ->whereHas('jobApplications', fn($query) => $query->where('user_id', '=', $user->id ?? $user))
+            ->whereHas('jobApplications', fn ($query) => $query->where('user_id', '=', $user->id ?? $user))
             ->exists();
     }
 }
