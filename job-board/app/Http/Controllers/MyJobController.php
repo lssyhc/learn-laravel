@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\JobRequest;
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class MyJobController extends Controller
 {
@@ -13,6 +14,7 @@ class MyJobController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Job::class);
         return view(
             'my_job.index',
             [
@@ -28,6 +30,7 @@ class MyJobController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Job::class);
         return view('my_job.create', [
             'experience' => Job::$experience,
             'category' => Job::$category
@@ -39,6 +42,7 @@ class MyJobController extends Controller
      */
     public function store(JobRequest $request)
     {
+        Gate::authorize('create', Job::class);
         $validatedData = $request->validate($request->validated());
         auth()->user()->employer->jobs()->create($validatedData);
 
@@ -50,6 +54,7 @@ class MyJobController extends Controller
      */
     public function edit(Job $myJob)
     {
+        Gate::authorize('update', Job::class);
         return view('my_job.edit', ['job' => $myJob]);
     }
 
@@ -58,17 +63,12 @@ class MyJobController extends Controller
      */
     public function update(JobRequest $request, Job $myJob)
     {
+
+        Gate::authorize('update', Job::class);
+
         $myJob->update($request->validated());
 
         return redirect()->route('my-job.index')
             ->with('success', 'Job updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
