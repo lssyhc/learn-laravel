@@ -5,8 +5,8 @@ $startTime = microtime(true);
 $startMemory = memory_get_usage();
 
 $out = [];
-foreach ($largeArray as $value) {
-    $out[] = $value * 2;
+foreach ($largeArray as &$value) {
+    $value = $value * 2;
 }
 
 $endTime = microtime(true);
