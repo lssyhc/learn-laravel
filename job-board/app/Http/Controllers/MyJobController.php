@@ -18,9 +18,11 @@ class MyJobController extends Controller
         return view(
             'my_job.index',
             [
-            'jobs' => auth()->user()->employer->jobs()->with([
+            'jobs' => auth()->user()->employer->jobs()->with(
+                [
                 'employer', 'jobApplications', 'jobApplications.user'
-                ])->get()
+                ]
+            )->withTrashed()->get()
         ]
         );
     }
