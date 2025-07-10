@@ -6,7 +6,7 @@ function add(int $a, int $b)
 }
 var_dump(add(1, 3), add(1, 3));
 
-$toal = 0;
+$total = 0;
 
 function addTo($value)
 {
