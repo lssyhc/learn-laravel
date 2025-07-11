@@ -48,3 +48,38 @@ var_dump($moreNumbers);
 
 [$first, , $second] = $fruits;
 var_dump($first, $second);
+
+$set1 = [1,2,3,4,5];
+$set2 = [3,4,5,6,7];
+var_dump(array_intersect($set1, $set2));
+var_dump(array_intersect($set2, $set1));
+var_dump(array_diff($set1, $set2));
+var_dump(array_diff($set2, $set1));
+
+$keys = array_map(fn ($key) => ucfirst($key), array_keys($associativeArray));
+$values = array_values($associativeArray);
+var_dump($keys, $values);
+
+var_dump(
+    array_key_exists('name', $associativeArray),
+    in_array('Lily', $associativeArray)
+);
+
+$fruitString = implode(', ', $fruits);
+$backToArray = explode(', ', $fruitString);
+var_dump($fruitString, $backToArray);
+
+var_dump(
+    array_merge($set1, $set2),
+    array_merge($associativeArray, ['hobby' => 'Daydreaming']),
+    $set1 + $set2,
+    $associativeArray + ['hoby' => 'Daydreaming'],
+    [...$set1, ...$set2],
+    [...$associativeArray, ...['hobby' => 'Daydreaming']],
+    array_unique(array_merge($set1, $set2)),
+    array_slice($set1, 1, 3)
+);
+
+var_dump(
+    array_search('banana', $fruits)
+);
